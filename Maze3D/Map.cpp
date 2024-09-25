@@ -6,10 +6,6 @@ namespace maze
 	{
 		//do nothing
 	}
-	// Map
-	Map::Map(std::string map)
-	{
-	}
 
 	Map::~Map()
 	{
@@ -20,18 +16,21 @@ namespace maze
 	/// </summary>
 	/// <param name="v"></param>
 	/// <returns></returns>
-	bool Map::IsPointInWall(Vector v)
+	Map::PointState Map::IsPointInWall(Vector v)
 	{
 		switch (map[(int)std::floor(v.y)][(int)std::floor(v.x)])
 		{
 		case 0:
-		case 2:
-			return false;
+			return PointState::empty;
 		case 1:
-			return true;
+			return PointState::wall;
+		case 2:
+			return PointState::start;
+		case 3:
+			return PointState::end;
 		default:
 			// error
-			return true;
+			return PointState::wall;
 		}
 	}
 
@@ -51,5 +50,43 @@ namespace maze
 			return Vector(1, 0, 0);
 		}
 		return Vector(0,1,0);
+	}
+
+	/// <summary>
+	/// returns the starting point of the map
+	/// </summary>
+	/// <returns></returns>
+	Vector Map::GetStartPoint()
+	{
+		for (int y = 0; y < mapY; y++)
+		{
+			for (int x = 0; x < mapX; x++)
+			{
+				// if starting point
+				if (map[y][x]==room_start) {
+					return Vector(x, y, 0.5f);
+				}
+			}
+		}
+		return Vector(-1, -1, -1);
+	}
+
+	/// <summary>
+	/// returns the ending point of the map
+	/// </summary>
+	/// <returns></returns>
+	Vector Map::GetEndPoint()
+	{
+		for (int y = 0; y < mapY; y++)
+		{
+			for (int x = 0; x < mapX; x++)
+			{
+				// if starting point
+				if (map[y][x] == room_end) {
+					return Vector(x, y, 0.5f);
+				}
+			}
+		}
+		return Vector(-1, -1, -1);
 	}
 }

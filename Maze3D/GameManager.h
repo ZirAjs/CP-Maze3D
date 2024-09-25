@@ -6,6 +6,7 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include <map>
 #include "Player.h"
 #include "Map.h"
 #include "GameMath.h"
@@ -48,7 +49,7 @@ namespace maze
 
 	private:
 		// fields
-		
+
 		// new player
 		Player* player;
 
@@ -61,7 +62,9 @@ namespace maze
 		// console size
 		const COORD consoleSize{ CONSOLE_X,CONSOLE_Y };
 		// CONSOLE_Y x CONSOLE_X
-		char consoleScreen[CONSOLE_Y][CONSOLE_X];
+		char consoleScreen[CONSOLE_Y][CONSOLE_X] = {};
+		std::string consoleScreenColor[CONSOLE_Y][CONSOLE_X] = {};
+
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 
 		// rendering options
@@ -72,6 +75,11 @@ namespace maze
 		float stepSize = 0.02;
 		float yDirOffset = 0.03f;
 
+		// color table
+		const std::map<Map::PointState, std::string> colorMap = { {Map::PointState::wall, "\033[39m"},
+			{Map::PointState::empty, "\033[39m"} ,
+			{Map::PointState::start, "\033[34m"} ,
+			{Map::PointState::end, "\033[33m"} };
 
 
 		// methods
@@ -82,6 +90,6 @@ namespace maze
 		char MatchAscii(float brightness);
 
 		// Not Used
-		void DrawPixel(COORD , char) const;
+		void DrawPixel(COORD, char) const;
 	};
 }

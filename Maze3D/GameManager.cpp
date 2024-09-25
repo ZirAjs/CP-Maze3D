@@ -7,8 +7,7 @@ namespace maze
 	GameManager::GameManager()
 	{
 		InitConsole();
-		map = Map();
-		player = new Player(Vector{ 1.5, 1.5, 0.5 });
+		player = new Player(map.GetStartPoint() + Vector(0.5f, 0.5f, 0));
 	}
 
 	GameManager::~GameManager()
@@ -71,7 +70,7 @@ namespace maze
 				}
 
 				// apply movement when dest is not inside the map
-				if (!map.IsPointInWall(dest)) {
+				if (map.IsPointInWall(dest)!=Map::wall) {
 					// apply movement
 					player->pos = dest;
 				}
@@ -142,10 +141,17 @@ namespace maze
 					camY - yDirOffset);
 				Ray r(player->pos + dir, Vector::Normalize(dir));
 
+
+				// used to store previous point state. inorderto color the room correctly.
+				Map::PointState tempPointState = Map::empty;
+
 				// raycast...no possibility of 'Failed to raycast'
 				for (int i = 1; i < 1000; i++)
 				{
+					// point to test
 					Vector test = r.pos + r.direction * stepSize * i;
+					//test result
+					Map::PointState pointState = map.IsPointInWall(test);
 
 					if (test.z <= 0) {
 						// I = (raydir dotproduct normalvector) * I0 / (r**2)
@@ -153,6 +159,7 @@ namespace maze
 
 						// match brightness
 						consoleScreen[y][x] = MatchAscii(brightness);
+						consoleScreenColor[y][x] = colorMap.at(tempPointState);
 						break;
 					}
 					else if (test.z >= 1) {
@@ -161,17 +168,19 @@ namespace maze
 
 						// match brightness
 						consoleScreen[y][x] = MatchAscii(brightness);
+						consoleScreenColor[y][x] = colorMap.at(tempPointState);
 						break;
 					}
-					else if (map.IsPointInWall(test)) {
+					else if (pointState==Map::PointState::wall) {
 						// I = (raydir dotproduct normalvector) * I0 / (r**2)
 						float brightness = std::abs(Vector::InnerProduct(r.direction, map.GetWallNormalVector(Ray(test, r.direction))) * LIGHT_INTENSITY / std::pow((stepSize * i), 2));
 
 						// match brightness
 						consoleScreen[y][x] = MatchAscii(brightness);
+						consoleScreenColor[y][x] = colorMap.at(tempPointState);
 						break;
 					}
-
+					tempPointState = pointState;
 				}
 			}
 		}
@@ -201,7 +210,7 @@ namespace maze
 		for (int y = 0; y < CONSOLE_Y; y++) {
 			for (int x = 0; x < CONSOLE_X; x++)
 			{
-				screenStream << consoleScreen[y][x];
+				screenStream << consoleScreenColor[y][x] << consoleScreen[y][x];
 			}
 			screenStream << '\n';
 		}
