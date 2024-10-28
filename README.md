@@ -6,6 +6,9 @@ Maze3D is a maze exploring game with a small scale game engine.
 The work is primarily focused on the game engine part, especially on rendering part. 
 This project was made using c++ standard library only.
 
+The project is made in pure c++. 
+Made for Computer programming course assginment.
+
 
 Unque aspects
 
