@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,16 +128,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="GameEngine\Camera.cpp" />
+    <ClCompile Include="GameEngine\GameUtility.cpp" />
+    <ClCompile Include="GameEngine\Map.cpp" />
+    <ClCompile Include="GameEngine\Object.cpp" />
+    <ClCompile Include="GameEngine\Renderable.cpp" />
+    <ClCompile Include="GameEngine\Renderer.cpp" />
+    <ClCompile Include="GameEngine\Transform.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="GameMath.cpp" />
     <ClCompile Include="Maze3D.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="GameEngine\Camera.h" />
+    <ClInclude Include="GameEngine\EngineTypes.h" />
+    <ClInclude Include="GameEngine\GameUtility.h" />
+    <ClInclude Include="GameEngine\Map.h" />
+    <ClInclude Include="GameEngine\Object.h" />
+    <ClInclude Include="GameEngine\Renderable.h" />
+    <ClInclude Include="GameEngine\Renderer.h" />
+    <ClInclude Include="GameEngine\Transform.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="GameMath.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

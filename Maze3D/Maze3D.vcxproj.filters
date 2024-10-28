@@ -21,13 +21,31 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameMath.cpp">
+    <ClCompile Include="GameEngine\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GameUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +53,34 @@
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameMath.h">
+    <ClInclude Include="GameEngine\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GameUtility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\EngineTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

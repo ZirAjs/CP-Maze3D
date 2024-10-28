@@ -1,29 +1,25 @@
 #pragma once
-#include "Map.h"
-#include "GameMath.h"
+#include "GameEngine/Map.h"
+#include "GameEngine/GameUtility.h"
+#include "GameEngine/Object.h"
 
 namespace maze {
 
-	class Player
-	{
+    class Player : public Engine::Object
+    {
 
-		public:
-			Player(Vector);
+        public:
+            Player(Engine::Vector position, float angle = 0, Object* parent = nullptr) ;
+            ~Player();
 
-			//player position
-			Vector pos;
-			float getDirection();
-			void addDirection(float angle);
-			void setDirection(float angle);
+            // preference
+            float rotationFactor = 0.05f * Engine::Pi;
+            float speedFactor = 0.3f;
 
-			// preference
-			float rotationFactor = 0.05f * Pi;
-			float speedFactor = 0.3f;
+    private:
+        float direction = 0.0f;
 
-	private:
-		float direction = 0.0f;
-
-	};
+    };
 
 }
 

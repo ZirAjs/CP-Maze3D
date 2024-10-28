@@ -1,40 +1,50 @@
 #pragma once
-#include <Windows.h>
-#include <iostream>
 #include <string>
 #include <conio.h>
 #include <cmath>
-#include <sstream>
 #include <string>
 #include <map>
 #include "Player.h"
-#include "Map.h"
-#include "GameMath.h"
+#include "Box.h"
+#include "GameEngine/Map.h"
+#include "GameEngine/GameUtility.h"
+#include "GameEngine/Renderer.h"
+#include "GameEngine/Renderable.h"
+#include "GameEngine/Camera.h"
+#include "GameEngine/EngineTypes.h"
 
-
-//for debug
-//#define DBOUT( s )			\
+#if _DEBUG
+#define DBOUT( s )			\
+{							\
+	std::ostringstream os_;	\
+	os_ << s;				\
+	OutputDebugStringA(os_.str().c_str()); \
+}
+#endif
+// #define DBOUT( s )			\
 //{							\
 //	std::ostringstream os_;	\
 //	os_ << s;				\
 //	OutputDebugStringA(os_.str().c_str()); \
 //}
 
-
-
-
 namespace maze
 {
-	// define console ratio
-	// (18x36x16) x (36x18x9) 16:9¿¡ °¡±õµµ·Ï
-	// cursor size
-	constexpr int CURSOR_X = 18;
-	constexpr int CURSOR_Y = 36;
 
-	//288:81->144:40
-	constexpr int CONSOLE_X = 144;
-	constexpr int CONSOLE_Y = 40;
+	// alias
+	//template <typename T>
+	//using uPtr = std::unique_ptr<T>;
+	using Map = Engine::Map;
+	using Renderer = Engine::Renderer;
+	using Camera = Engine::Camera;
+	constexpr const float& Pi = Engine::Pi;
 
+
+	constexpr int KEY_ESC = 27; // Escape key
+	constexpr int KEY_UP = 72;  // Up arrow key
+	constexpr int KEY_DOWN = 80; // Down arrow key
+	constexpr int KEY_LEFT = 75; // Left arrow key
+	constexpr int KEY_RIGHT = 77; // Right arrow key
 
 	class GameManager
 	{
@@ -44,52 +54,24 @@ namespace maze
 		GameManager();
 		~GameManager();
 
-		//methods
+		// methods
 		void Mainloop();
 
 	private:
-		// fields
+
+		// renderer
+		Renderer* renderer;
+
+		// camera
+		Camera* camera;
 
 		// new player
 		Player* player;
 
 		// game map
-		Map map;
+		Map* map;
 
-		// console handle
-		HANDLE hOut;
-
-		// console size
-		const COORD consoleSize{ CONSOLE_X,CONSOLE_Y };
-		// CONSOLE_Y x CONSOLE_X
-		char consoleScreen[CONSOLE_Y][CONSOLE_X] = {};
-		std::string consoleScreenColor[CONSOLE_Y][CONSOLE_X] = {};
-
-		CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-		// rendering options
-		int LIGHT_INTENSITY = 300;
-		float camPlaneX = 0.16;
-		float camPlaneY = 0.09;
-		float camZ = 0.1;
-		float stepSize = 0.02;
-		float yDirOffset = 0.03f;
-
-		// color table
-		const std::map<Map::PointState, std::string> colorMap = { {Map::PointState::wall, "\033[39m"},
-			{Map::PointState::empty, "\033[39m"} ,
-			{Map::PointState::start, "\033[34m"} ,
-			{Map::PointState::end, "\033[33m"} };
-
-
-		// methods
-		void InitConsole();
-		void GetCsbi();
-		void Render();
-		void DrawConsoleScreen();
-		char MatchAscii(float brightness);
-
-		// Not Used
-		void DrawPixel(COORD, char) const;
+		// objects for demonstration
+		Engine::Renderer::renderables_t renderables{};
 	};
 }
