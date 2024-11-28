@@ -10,7 +10,7 @@ The project is made in pure c++.
 Made for Computer programming course assginment.
 
 
-Unque aspects
+Unique aspects
 
 - ascii style graphics
 - graphic engine exclusively made for game's console rendering
