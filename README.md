@@ -17,6 +17,16 @@ Unique aspects
 - set of classes that are ready for bigger projects
 - etc.
 
+## Controls and Requirements
+
+Platform: `windows`
+
+Controls: 
+- move: `→←↑↓`
+- rotate: `.,` (<, > key)
+
+
+
 ## Demonstration
 
 ![v0.2](https://github.com/user-attachments/assets/c118eaea-eb27-4b68-a376-3dfe558094c4)
